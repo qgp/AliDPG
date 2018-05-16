@@ -40,6 +40,8 @@ enum EGenerator_t {
   kGeneratorAMPT, kGeneratorAMPT_v226t7,
   // Therminator2
   kGeneratorTherminator2,
+  // ALIGENMC
+  kGeneratorALIGENMC,
   // QED electrons
   kGeneratorQED,
   //
@@ -81,6 +83,8 @@ const Char_t *GeneratorName[kNGenerators] = {
   "AMPT", "AMPT_v226t7",
   // Therminator2
   "Therminator2",
+  // ALIGENMC
+  "ALIGENMC",
   // QED electrons
   "QED",
   //
@@ -193,6 +197,7 @@ AliGenerator *GeneratorDRgen();
 AliGenerator *GeneratorAMPT();
 AliGenerator *GeneratorAMPT_v226t7();
 AliGenerator *GeneratorTherminator2();
+AliGenerator *GeneratorALIGENMC();
 AliGenerator *GeneratorQED();
 
 /*****************************************************************/
@@ -305,6 +310,9 @@ void GeneratorConfig(Int_t tag)
     gen = GeneratorTherminator2();
     break;
 
+ case kGeneratorALIGENMC:
+    gen = GeneratorALIGENMC();
+    break;
   case kGeneratorQED:
     gen = GeneratorQED();
     break;
@@ -1418,6 +1426,17 @@ GeneratorTherminator2()
     AliGenExtExec* gener = new AliGenExtExec();
     gener->SetPathScript(gSystem->ExpandPathName("$ALIDPG_ROOT/MC/EXTRA/gen_therm2.sh"));
     return gener;
+}
+
+/*** ALIGENMC ****************************************************/
+
+AliGenerator *
+GeneratorALIGENMC()
+{
+  AliGenExtExec *gener = new AliGenExtExec();
+  gener->SetPathScript("$ALIDPG_ROOT/MC/aligenmc/gen_aligenmc.sh");
+  // how to pass parameters ???
+  return gener;
 }
 
 /*** COCKTAIL ****************************************************/
